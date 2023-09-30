@@ -343,7 +343,6 @@ def pusher(task_queue: Queue, event: Event, broker: Broker = None):
     while True:
         try:
             task_set = broker.dequeue()
-            sleep(5)
         except Exception as e:
             logger.error(e, traceback.format_exc())
             # broker probably crashed. Let the sentinel handle it.
@@ -364,6 +363,10 @@ def pusher(task_queue: Queue, event: Event, broker: Broker = None):
             logger.debug(_(f"queueing from {broker.list_key}"))
         if event.is_set():
             break
+
+        sleep(
+            5
+        )
     logger.info(_(f"{current_process().name} stopped pushing tasks"))
 
 
