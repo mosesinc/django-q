@@ -365,7 +365,7 @@ def pusher(task_queue: Queue, event: Event, broker: Broker = None):
             break
 
         sleep(
-            5
+            10
         )
     logger.info(_(f"{current_process().name} stopped pushing tasks"))
 
